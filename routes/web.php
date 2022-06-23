@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,32 +13,14 @@ use App\Http\Controllers\UserController;
 |
 */
 
-// Route::get('/profil', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/users', [UserController::class, 'index']);
-Route::get('/my_home/kj/sdfsdfhk', ['App\Http\Controllers\UserController', 'index'])->name('home');
-// Route::view('/', 'welcome', ['name' => 'Salma']);
-
-// Route::get('/users/{id}/{name?}', function($user_id){
-//     return "USer ID: $user_id, NAme:";
-// });
-
-Route::name('users.')->prefix('users')->controller('App\Http\Controllers\UserController')->group(function(){
-    Route::get('/{id}/{name?}', 'show') ->where('id', '[0-9]+')->name('show');
-    Route::get('','index') ->name('index');
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::get('there', function(){
-    return route('users.show', ['id' => 6, 'name' => 'salma', 'q' => '123']);
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::redirect('/here', '/there');
-// Route::get('/register');
-// Route::post('registration', );
+Route::resource('articles', 'App\Http\Controllers\ArticleController');
 
-// Route::fallback(function () {
-//     return 'Oooops!!';
-// });
-// Route::get('/', 'App\Http\Controllers\UserController@index');
+require __DIR__.'/auth.php';
