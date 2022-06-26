@@ -8,6 +8,10 @@
     {!! Form::open(['route' => ['articles.destroy', $article->id], 'method' => 'delete']) !!}
     <button type="submit" class="btn btn-danger">DELETE</button>
     {!! Form::close() !!}
+
+    @foreach ($errors->all() as $error)
+        {{ $error }} <br>
+    @endforeach
     
     {!! Form::model($article, ['route' => ['articles.update', $article->id], 'method' => 'PUT']) !!}
     <div class="mb-3">

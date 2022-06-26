@@ -11,13 +11,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-                <x-nav-link href="{{ route('articles.index') }}" :active="request()->routeIs('articles.index')">
+                {{-- <x-nav-link href="{{ route('articles.index') }}" :active="request()->routeIs('articles.index')">
                     {{ __('Blog') }}
-                </x-nav-link>
+                </x-nav-link> --}}
+                <a class="nav-link" href="{{ route('articles.index', ['q' => 'php']) }}">
+                    Blog
+                </a>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('articles.create') }}">
-                        New Post
-                    </a>
+                    @can('create', \App\Models\Article::class)
+                        <a class="nav-link" href="{{ route('articles.create') }}">
+                            New Post
+                        </a>
+                    @endcan
                 </li>
             </ul>
 

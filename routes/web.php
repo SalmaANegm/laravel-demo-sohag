@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test/{user}', function( \App\Models\User $user ){ //$user =  \App\Models\User::find(1)
+    return $user->email;
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,6 +25,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('articles', 'App\Http\Controllers\ArticleController');
+Route::resource('articles', 'App\Http\Controllers\ArticleController')->middleware('auth');
 
 require __DIR__.'/auth.php';

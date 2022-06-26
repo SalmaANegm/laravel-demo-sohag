@@ -33,6 +33,17 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            
+        });
+        
+        static::updating(function ($user) {
+            
+        });
+    }
+
     /**
      * The attributes that should be cast.
      *
@@ -41,4 +52,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function articles(){
+        return $this->hasMany('App\Models\Article');
+    }
 }
